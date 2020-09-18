@@ -572,6 +572,7 @@ formatswapdevice(){
 formatdevice(){
 	options=()
 	options+=("btrfs" "")
+	options+=("btrfsmanual" "")
 	options+=("ext4" "")
 	options+=("ext3" "")
 	options+=("ext2" "")
@@ -606,6 +607,12 @@ formatdevice(){
 				btrfs subvolume set-default /mnt/root
 				umount /mnt
 			fi
+		;;
+		btrfsmanual)
+			fspkgs="${fspkgs[@]} btrfs-progs"
+			echo "Do manual partitioning in different tty, then come back and press any key."
+			pressanykey
+			installmenu
 		;;
 		ext4)
 			echo "mkfs.ext4 ${2}"
